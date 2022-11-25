@@ -18,13 +18,12 @@ def test_can_pick_winner():
     lottery = deploy_lottery()
     account = get_account()
     initial_account_balance = account.balance()
-    print(initial_account_balance)
     lottery.startLottery({"from": account})
     bill_value = lottery.getEntranceFee() + 100000
     lottery.enter({"from": account, "value": bill_value})
     fund_link(lottery)
     tx = lottery.endLottery({"from": account})
-    time.sleep(30)
+    time.sleep(180)
     #
     assert lottery.lottery_state() == 1
     assert lottery.recentWinner() == account
